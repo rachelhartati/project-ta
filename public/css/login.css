@@ -1,0 +1,333 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    background: #f5f7f6;
+    overflow: hidden;
+}
+
+/* ========================= */
+/* CONTAINER */
+/* ========================= */
+
+.container{
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ========================= */
+/* LEFT SIDE */
+/* ========================= */
+
+.left{
+    width: 40%;
+    background: linear-gradient(135deg, #16c79a, #0fb9b1);
+    color: white;
+    position: relative;
+    overflow: hidden;
+
+    padding: 60px 50px;
+}
+
+/* POSISI TEKS */
+
+.left-content{
+    position: relative;
+    z-index: 2;
+
+    margin-top: 70px;
+}
+
+/* JUDUL */
+
+.left h1{
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* GARIS */
+
+.line{
+    width: 45px;
+    height: 3px;
+    background: white;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+/* SUBTITLE */
+
+.left p{
+    font-size: 16px;
+    line-height: 1.8;
+    opacity: 0.95;
+}
+
+/* ========================= */
+/* BACKGROUND CIRCLE */
+/* ========================= */
+
+.circle{
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+}
+
+/* BULATAN */
+
+.c1{
+    width: 220px;
+    height: 220px;
+    bottom: -60px;
+    left: -60px;
+}
+
+.c2{
+    width: 340px;
+    height: 340px;
+    bottom: -140px;
+    left: 70px;
+}
+
+.c3{
+    width: 170px;
+    height: 170px;
+    bottom: 60px;
+    left: 180px;
+}
+
+/* ========================= */
+/* CHECK ICON */
+/* ========================= */
+
+.check-wrapper{
+    position: absolute;
+
+    bottom: 110px;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 95px;
+    height: 95px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.18);
+    border: 2px solid rgba(255,255,255,0.35);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 2;
+}
+
+.check-inner{
+    width: 70px;
+    height: 70px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* ICON CENTANG */
+
+.check-inner svg{
+    color: #16c79a;
+    width: 30px;
+    height: 30px;
+}
+
+/* ========================= */
+/* RIGHT SIDE */
+/* ========================= */
+
+.right{
+    width: 60%;
+    background: #f8f8f8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px;
+}
+
+/* ========================= */
+/* FORM */
+/* ========================= */
+
+.form-container{
+    width: 380px;
+}
+
+/* LOGO */
+
+.logo{
+    text-align: center;
+    margin-bottom: 45px;
+
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: 4px;
+
+    color: #555;
+}
+
+.logo span{
+    color: #16c79a;
+}
+
+/* ========================= */
+/* INPUT */
+/* ========================= */
+
+label{
+    font-size: 15px;
+    margin-bottom: 8px;
+    display: block;
+    color: #333;
+}
+
+label span{
+    color: red;
+}
+
+input{
+    width: 100%;
+    padding: 14px;
+
+    border-radius: 12px;
+    border: 1px solid #ddd;
+
+    margin-bottom: 22px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+input:focus{
+    border-color: #16c79a;
+    box-shadow: 0 0 0 3px rgba(22,199,154,0.1);
+}
+
+/* ========================= */
+/* BUTTON */
+/* ========================= */
+
+button{
+    width: 180px;
+    padding: 13px;
+
+    background: #16c79a;
+    color: white;
+
+    border: none;
+    border-radius: 30px;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    display: block;
+    margin: 15px auto;
+
+    transition: 0.2s;
+}
+
+button:hover{
+    background: #11b78d;
+    transform: translateY(-2px);
+}
+
+/* ========================= */
+/* INFO BOX */
+/* ========================= */
+
+.info-box{
+    margin-top: 30px;
+
+    background: #e8f8f4;
+
+    padding: 16px;
+    border-radius: 14px;
+
+    font-size: 13px;
+    color: #4d7b74;
+
+    line-height: 1.6;
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media(max-width: 768px){
+
+    .container{
+        flex-direction: column;
+    }
+
+    .left{
+        width: 100%;
+        min-height: 320px;
+
+        padding: 40px 30px 100px;
+    }
+
+    .left-content{
+        margin-top: 40px;
+    }
+
+    .right{
+        width: 100%;
+        padding: 40px 25px;
+    }
+
+    .left h1{
+        font-size: 38px;
+    }
+
+    .logo{
+        font-size: 32px;
+    }
+
+    .form-container{
+        width: 100%;
+    }
+
+    /* CHECK MOBILE */
+
+    .check-wrapper{
+        bottom: 40px;
+        width: 80px;
+        height: 80px;
+    }
+
+    .check-inner{
+        width: 60px;
+        height: 60px;
+    }
+
+    .check-inner svg{
+        width: 26px;
+        height: 26px;
+    }
+}
