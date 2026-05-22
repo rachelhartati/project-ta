@@ -6,18 +6,9 @@ use App\Http\Controllers\DashboardController;
 
 // halaman utama → arahkan ke role
 Route::get('/', function () {
-    return redirect()->route('role');
+    return view('login');
 });
 
-// halaman role
-Route::get('/role', function () {
-    return view('role');
-})->name('role');
-
-// halaman login berdasarkan role
-Route::get('/login/{role}', function ($role) {
-    return view('login', compact('role'));
-})->name('login');
 
 // proses login
 Route::post('/login', [AuthController::class, 'login'])->name('login.process');
@@ -48,3 +39,11 @@ Route::get('/kelola-agenanggota', function () {
 Route::get('/kelola-setoran', function () {
     return view('kelola-setoran');
 }) ->name('kelola-setoran');
+
+Route::get('/user', function () {
+    return view('user');
+}) ->name('user');
+
+Route::get('/role', function () {
+    return view('role');
+}) ->name('role');

@@ -491,6 +491,20 @@
                 </a>
             </li>
 
+             <li>
+                <a href="{{route('user')}}">
+                    <i class="bi bi-person"></i>
+                    <span>User</span>
+                </a>
+            </li>
+
+             <li>
+                <a href="{{route('role')}}">
+                   <i class="bi bi-key"></i>
+                    <span>Role</span>
+                </a>
+            </li>
+
             <li>
                 <a href="#">
                     <i class="bi bi-box-arrow-left"></i>

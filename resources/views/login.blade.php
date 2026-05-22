@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Login SIMPLAST</title>
+    <title>SIMPLAST</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -12,18 +13,14 @@
 
     <!-- LUCIDE ICON -->
     <script src="https://unpkg.com/lucide@latest"></script>
-
-    <!-- SWEET ALERT -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
 
-<div class="container">
-
     <!-- LEFT -->
     <div class="left">
 
+        <!-- CONTENT -->
         <div class="left-content">
 
             <h1>Selamat Datang</h1>
@@ -54,12 +51,21 @@
     <!-- RIGHT -->
     <div class="right">
 
-        <div class="form-container">
+        <!-- HEADER -->
+        <div class="header-center">
 
-            <!-- LOGO -->
-            <h2 class="logo">
+            <div class="logo">
                 SIMPL<span>A</span>ST
-            </h2>
+            </div>
+
+            <div class="subtitle">
+                Silahkan pilih peran Anda untuk melanjutkan
+            </div>
+
+        </div>
+        
+
+        <div class="form-container">
 
             <!-- FORM -->
             <form method="POST" action="{{ route('login.process') }}">
@@ -90,46 +96,26 @@
                 </button>
 
             </form>
+        </div>
 
-            <!-- INFO -->
-            <div class="info-box">
-                🔒 Sistem ini aman dan hanya dapat diakses oleh pengguna yang memiliki izin
-            </div>
+        
+        <!-- FOOTER -->
+        <div class="footer-note">
+
+            <i data-lucide="lock"></i>
+
+            <span>
+                Sistem ini aman dan hanya dapat diakses oleh pengguna yang memiliki izin
+            </span>
 
         </div>
 
     </div>
 
-</div>
-
-<!-- SWEET ALERT -->
-
-@if(session('warning'))
-<script>
-    Swal.fire({
-        icon: 'warning',
-        title: 'Oops!',
-        text: '{{ session('warning') }}',
-        confirmButtonColor: '#16c79a'
-    });
-</script>
-@endif
-
-@if(session('error'))
-<script>
-    Swal.fire({
-        icon: 'error',
-        title: 'Login Gagal',
-        text: '{{ session('error') }}',
-        confirmButtonColor: '#16c79a'
-    });
-</script>
-@endif
-
-<!-- INIT ICON -->
-<script>
-    lucide.createIcons();
-</script>
+    <!-- ICON INIT -->
+    <script>
+        lucide.createIcons();
+    </script>
 
 </body>
 </html>
