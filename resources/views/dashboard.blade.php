@@ -499,14 +499,6 @@
             </li>
 
             <li>
-                <a href="">
-                    <i class="bi bi-arrow-left-right"></i>
-                    <span>Stok</span>
-                </a>
-            </li>
-
-
-            <li>
                 <a href="{{route('user.index')}}">
                     <i class="bi bi-person"></i>
                     <span>User</span>
