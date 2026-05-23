@@ -499,7 +499,7 @@
             </li>
 
              <li>
-                <a href="{{route('role')}}">
+                <a href="{{route('role.index')}}">
                    <i class="bi bi-key"></i>
                     <span>Role</span>
                 </a>

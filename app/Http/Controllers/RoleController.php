@@ -8,13 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class RoleController extends Controller {
 
-    public function __construct(){
-        $this->middleware(['auth', 'role:admin']);
-    }
+    // public function __construct(){
+    //     $this->middleware(['auth', 'role:admin']);
+    // }
 
     public function index() {
-        $roles = Role::all();
+        $roles = Role::paginate(10);
         return view('role.role', compact('roles'));
+    }
+
+    public function create() {
+        return view('role.tambah');
     }
 
     public function store(Request $request) {
@@ -23,13 +27,18 @@ class RoleController extends Controller {
 
         Role::create(['name'=> $request->name]);
 
-        return redirect()->route('role')->with('success', 'Role berhasil ditambahkan.');
+        return redirect()->route('role.index')->with('success', 'Role berhasil ditambahkan.');
+    }
+
+    public function edit($id){
+        $role = Role::findOrFail($id);
+        return view('role.edit', compact('role'));
     }
 
     public function destroy($id) {
         $role = Role::findOrFail($id);
         $role->delete();
-        return redirect()->route('role')->with('success', 'Role berhasil dihapus.');
+        return redirect()->route('role.index')->with('success', 'Role berhasil dihapus.');
     }
 
     public function update(Request $request, $id) {
@@ -41,7 +50,7 @@ class RoleController extends Controller {
         $role->name=$request->name;
         $role->save();
 
-        return redirect()->route('role')->with('success', 'Role berhasil diperbarui.');
+        return redirect()->route('role.index')->with('success', 'Role berhasil diperbarui.');
 
     }
 
@@ -60,7 +69,7 @@ class RoleController extends Controller {
 
         $role->syncPermissions($permissions);
 
-        return redirect() ->route('role') ->with('success', 'Permissions berhasil diperbarui');
+        return redirect() ->route('role.index') ->with('success', 'Permissions berhasil diperbarui');
     }
 
 }
