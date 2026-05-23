@@ -8,6 +8,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\AgentRequestController;
+use App\Http\Controllers\AgenStokController;
 // halaman utama → arahkan ke role
 Route::get('/', function () {
     return view('login');
@@ -60,6 +61,8 @@ Route::delete('/request/{id}/delete', [AgentRequestController::class, 'destroy']
 Route::get('/request/{id}/detail', [AgentRequestController::class, 'show'])->name('request.detail');
 Route::put('/request/{id}/approve', [AgentRequestController::class, 'approve'])->name('request.approve');
 Route::put('/request/{id}/reject', [AgentRequestController::class, 'reject'])->name('request.reject');
+
+Route::get('/agentstok',[AgenStokController::class, 'index'])->name('agentstok.index');
 
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');

@@ -506,6 +506,13 @@
             </li>
 
             <li>
+                <a href="{{route('agentstok.index')}}">
+                    <i class="bi bi-collection"></i>
+                    <span>Stok</span>
+                </a>
+            </li>
+
+            <li>
                 <a href="{{route('user.index')}}">
                     <i class="bi bi-person"></i>
                     <span>User</span>

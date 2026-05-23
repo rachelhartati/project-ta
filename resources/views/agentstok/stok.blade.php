@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kelola Stok - SIMPLAST</title>
+    <title>Stok Agen - SIMPLAST</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -129,29 +129,52 @@
             margin-bottom: 25px;
         }
 
-        /* ================= ALERT ================= */
+        /* ================= FILTER BOX ================= */
 
-        .alert {
-            padding: 14px 18px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            font-weight: 500;
+        .filter-box {
+            background: white;
+            border-radius: 12px;
+            padding: 16px 20px;
             display: flex;
+            gap: 14px;
             align-items: center;
-            gap: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            flex-wrap: wrap;
         }
 
-        .alert-success {
-            background: #d8f7df;
-            color: #1ca54f;
-            border-left: 4px solid #1ca54f;
+        .search-box {
+            position: relative;
         }
 
-        .alert-danger {
-            background: #ffe0e0;
-            color: #d94b4b;
-            border-left: 4px solid #d94b4b;
+        .search-box input {
+            padding: 10px 40px 10px 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            width: 260px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+
+        .filter-select {
+            height: 42px;
+            padding: 0 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            background: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            min-width: 180px;
         }
 
         /* ================= TABLE BOX ================= */
@@ -168,62 +191,11 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
         }
 
         .table-header h3 {
             font-size: 20px;
             font-weight: 600;
-        }
-
-        .header-action {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .search-box {
-            position: relative;
-        }
-
-        .search-box input {
-            padding: 10px 40px 10px 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            outline: none;
-            width: 250px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-        }
-
-        .search-box i {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #777;
-        }
-
-        .btn-add {
-            background: #01C094;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 14px;
-            font-family: 'Poppins', sans-serif;
-            white-space: nowrap;
-        }
-
-        .btn-add:hover {
-            background: #019e7a;
         }
 
         /* ================= TABLE ================= */
@@ -248,7 +220,18 @@
             vertical-align: middle;
         }
 
-        /* ================= BADGE STOK ================= */
+        /* ================= BADGE ================= */
+
+        .badge-item {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #e8fff7;
+            color: #00b386;
+        }
 
         .stok-badge {
             display: inline-flex;
@@ -275,44 +258,22 @@
             color: #d94b4b;
         }
 
-        /* ================= BUTTON AKSI ================= */
+        /* ================= EMPTY STATE ================= */
 
-        .btn {
-            padding: 7px 12px;
-            border: none;
-            border-radius: 6px;
-            font-size: 12px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-family: 'Poppins', sans-serif;
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #aaa;
         }
 
-        .btn-edit {
-            background: #fff4dd;
-            color: #d99a00;
+        .empty-state i {
+            font-size: 50px;
+            margin-bottom: 14px;
+            display: block;
         }
 
-        .btn-edit:hover {
-            background: #d99a00;
-            color: white;
-        }
-
-        .btn-delete {
-            background: #ffe5e5;
-            color: #e53935;
-        }
-
-        .btn-delete:hover {
-            background: #e53935;
-            color: white;
-        }
-
-        .action {
-            display: flex;
-            gap: 8px;
+        .empty-state p {
+            font-size: 15px;
         }
 
         /* ================= PAGINATION ================= */
@@ -345,24 +306,6 @@
             color: white;
         }
 
-        /* ================= EMPTY STATE ================= */
-
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #aaa;
-        }
-
-        .empty-state i {
-            font-size: 50px;
-            margin-bottom: 14px;
-            display: block;
-        }
-
-        .empty-state p {
-            font-size: 15px;
-        }
-
         /* ================= RESPONSIVE ================= */
 
         @media(max-width: 900px) {
@@ -382,12 +325,13 @@
                 margin-left: 90px;
             }
 
-            .table-header {
+            .filter-box {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: stretch;
             }
 
-            .search-box input {
+            .search-box input,
+            .filter-select {
                 width: 100%;
             }
         }
@@ -436,8 +380,8 @@
                 </li>
                 <li>
                     <a href="#" class="active-menu">
-                        <i class="bi bi-archive"></i>
-                        <span>Stok</span>
+                        <i class="bi bi-boxes"></i>
+                        <span>Stok Agen</span>
                     </a>
                 </li>
                 <li>
@@ -466,40 +410,21 @@
                 </div>
                 <div class="topbar-right">
                     <i class="bi bi-person-circle"></i>
-                    <span>{{ auth()->user()->name }}</span>
+                    <span>Admin</span>
                 </div>
             </div>
 
             {{-- CONTENT --}}
             <div class="content">
 
-                <div class="title">Kelola Stok</div>
-                <div class="subtitle">Data stok barang yang tersedia di gudang</div>
+                <div class="title">Stok Agen</div>
+                <div class="subtitle">Data stok barang yang dimiliki setiap agen</div>
 
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        <i class="bi bi-check-circle-fill"></i> {{ session('success') }}
-                    </div>
-                @endif
-                @if(session('error'))
-                    <div class="alert alert-danger">
-                        <i class="bi bi-exclamation-circle-fill"></i> {{ session('error') }}
-                    </div>
-                @endif
 
                 <div class="table-box">
 
                     <div class="table-header">
-                        <h3>Daftar Stok Barang</h3>
-                        <div class="header-action">
-                            <div class="search-box">
-                                <input type="text" placeholder="Cari nama item...">
-                                <i class="bi bi-search"></i>
-                            </div>
-                            <a href="{{ route('stok.create') }}" class="btn-add">
-                                <i class="bi bi-plus-lg"></i> Tambah Stok
-                            </a>
-                        </div>
+                        <h3>Daftar Stok Per Agen</h3>
                     </div>
 
                     {{-- TABLE --}}
@@ -507,24 +432,27 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Nama Agen</th>
                                 <th>Nama Item</th>
                                 <th>Jumlah Stok</th>
                                 <th>Keterangan</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($stoks as $stok)
+                            @forelse($agentstok as $agentStok)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $stok->item->nama_item ?? '-' }}</td>
-                                <td>{{ number_format($stok->jumlah_barang, 0, ',', '.') }} karung</td>
+                                <td>{{ $agentStok->agent->nama_agent ?? '-' }}</td>
                                 <td>
-                                    @if($stok->jumlah_barang <= 0)
+                                    <span class="badge-item">{{ $agentStok->item->nama_item ?? '-' }}</span>
+                                </td>
+                                <td>{{ number_format($agentStok->jumlah_barang, 0, ',', '.') }} karung</td>
+                                <td>
+                                    @if($agentStok->jumlah_barang <= 0)
                                         <span class="stok-badge stok-habis">
                                             <i class="bi bi-x-circle-fill"></i> Stok Habis
                                         </span>
-                                    @elseif($stok->jumlah_barang <= 10)
+                                    @elseif($agentStok->jumlah_barang <= 5)
                                         <span class="stok-badge stok-rendah">
                                             <i class="bi bi-exclamation-circle-fill"></i> Stok Rendah
                                         </span>
@@ -534,28 +462,13 @@
                                         </span>
                                     @endif
                                 </td>
-                                <td>
-                                    <div class="action">
-                                        <a href="{{ route('stok.edit', $stok->id) }}" class="btn btn-edit">
-                                            <i class="bi bi-pencil"></i> Edit
-                                        </a>
-                                        <form action="{{ route('stok.destroy', $stok->id) }}" method="POST"
-                                            onsubmit="return confirm('Yakin ingin menghapus stok ini?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-delete">
-                                                <i class="bi bi-trash"></i> Hapus
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
                             </tr>
                             @empty
                             <tr>
                                 <td colspan="5">
                                     <div class="empty-state">
-                                        <i class="bi bi-archive"></i>
-                                        <p>Belum ada data stok</p>
+                                        <i class="bi bi-boxes"></i>
+                                        <p>Belum ada data stok agen</p>
                                     </div>
                                 </td>
                             </tr>
@@ -564,22 +477,22 @@
                     </table>
 
                     {{-- PAGINATION --}}
-                    @if(isset($stoks) && method_exists($stoks, 'links'))
+                    @if(isset($agentStoks) && method_exists($agentStoks, 'links'))
                     <div class="pagination-wrap">
-                        <span>Menampilkan {{ $stoks->count() }} dari {{ $stoks->total() }} data</span>
+                        <span>Menampilkan {{ $agentStoks->count() }} dari {{ $agentStoks->total() }} data</span>
                         <div class="page-links">
-                            @if($stoks->onFirstPage())
+                            @if($agentStoks->onFirstPage())
                                 <a href="#"><i class="bi bi-chevron-left"></i></a>
                             @else
-                                <a href="{{ $stoks->previousPageUrl() }}"><i class="bi bi-chevron-left"></i></a>
+                                <a href="{{ $agentStoks->previousPageUrl() }}"><i class="bi bi-chevron-left"></i></a>
                             @endif
 
-                            @for($i = 1; $i <= $stoks->lastPage(); $i++)
-                                <a href="{{ $stoks->url($i) }}" class="{{ $stoks->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
+                            @for($i = 1; $i <= $agentStoks->lastPage(); $i++)
+                                <a href="{{ $agentStoks->url($i) }}" class="{{ $agentStoks->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
                             @endfor
 
-                            @if($stoks->hasMorePages())
-                                <a href="{{ $stoks->nextPageUrl() }}"><i class="bi bi-chevron-right"></i></a>
+                            @if($agentStoks->hasMorePages())
+                                <a href="{{ $agentStoks->nextPageUrl() }}"><i class="bi bi-chevron-right"></i></a>
                             @else
                                 <a href="#"><i class="bi bi-chevron-right"></i></a>
                             @endif
