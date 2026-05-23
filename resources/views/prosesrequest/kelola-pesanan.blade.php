@@ -443,7 +443,7 @@
             </li>
 
             <li>
-                <a href="{{ route('kelola-agenanggota') }}">
+                <a href="{{ route('agent.index') }}">
                     <i class="bi bi-people"></i>
                     <span>Kelola Agen & Anggota</span>
                 </a>

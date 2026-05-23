@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\AgentRequestController;
 // halaman utama → arahkan ke role
 Route::get('/', function () {
     return view('login');
@@ -16,8 +17,6 @@ Route::get('/', function () {
 // proses login
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-// halaman dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 // halaman lainnya
 Route::get('/pemesanan', function () {
@@ -47,6 +46,20 @@ Route::get('/kelola-setoran', function () {
 Route::get('/role', function () {
     return view('role');
 }) ->name('role');
+
+Route::group(['middleware'=> 'auth'], function () {
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::get('/request', [AgentRequestController::class, 'index'])->name('request.index');
+Route::get('/request/create', [AgentRequestController::class, 'create'])->name('request.create');
+Route::post('/request/store', [AgentRequestController::class, 'store'])->name('request.store');
+Route::get('/request/{id}/edit', [AgentRequestController::class, 'edit'])->name('request.edit');
+Route::put('/request/{id}/update', [AgentRequestController::class, 'update'])->name('request.update');
+Route::delete('/request/{id}/delete', [AgentRequestController::class, 'destroy'])->name('request.delete');
+Route::get('/request/{id}/detail', [AgentRequestController::class, 'show'])->name('request.detail');
+Route::put('/request/{id}/approve', [AgentRequestController::class, 'approve'])->name('request.approve');
+Route::put('/request/{id}/reject', [AgentRequestController::class, 'reject'])->name('request.reject');
 
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
@@ -81,3 +94,5 @@ Route::post('/item/store', [ItemController::class, 'store'])->name('item.store')
 Route::get('item/{id}/edit', [ItemController::class, 'edit'])->name('item.edit');
 Route::put('item/{id}', [ItemController::class, 'update'])->name('item.update');
 Route::delete('/item/{id}', [ItemController::class, 'destroy'])->name('item.destroy');
+
+});

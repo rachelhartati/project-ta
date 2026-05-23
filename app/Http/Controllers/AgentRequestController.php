@@ -1,48 +1,43 @@
 <?php namespace App\Http\Controllers;
 
 use App\Models\AgentRequest;
+use App\Models\AgentStok;
 use App\Models\Item;
 use App\Models\Stok;
 use Illuminate\Http\Request;
 
 class AgentRequestController extends Controller {
     public function index() {
-        $requests=AgentRequest::with('item', 'agent') ->where('agent_id', auth()->user()->agent_id) ->latest() ->get();
-        return view('agent_request.index', compact('requests'));
+        $requests=AgentRequest::with('item', 'agent') ->where('agent_id', auth()->user()->agent_id) ->latest() ->paginate(10);
+        return view('request.request', compact('requests'));
     }
 
     public function create() {
         $items=Item::all();
-        return view('agent_request.create', compact('items'));
+        return view('request.tambah', compact('items'));
     }
 
     public function store(Request $request) {
-        $request->validate([ 'item_id'=> 'required|exists:item,id',
-            'jumlah_barang'=> 'required|numeric|min:1',
-            'note'=> 'nullable|string',
-            ]);
+    $request->validate([
+        'item_id' => 'required|exists:item,id',
+        'jumlah_barang' => 'required|numeric|min:1',
+    ]);
 
-        $stok=Stok::where('item_id', $request->item_id)->first();
+    AgentRequest::create([
+        'agent_id' => auth()->user()->agent_id,
+        'tanggal_request' => now(),
+        'item_id' => $request->item_id,
+        'jumlah_barang' => $request->jumlah_barang,
+        'total' => $request->jumlah_barang * 25,
+        'status' => AgentRequest::STATUS_WAITING,
+    ]);
 
-        if ( !$stok || $stok->jumlah_barang < $request->jumlah_barang) {
-            return back()->with('error', 'Stok tidak mencukupi!');
-        }
-
-        AgentRequest::create([ 'agent_id'=> auth()->user()->agent_id,
-            'kode_request'=> 'REQ-'. time(),
-            'tanggal_request'=> now(),
-            'item_id'=> $request->item_id,
-            'jumlah_barang'=> $request->jumlah_barang,
-            'note'=> $request->note,
-            'status'=> AgentRequest::STATUS_WAITING,
-            ]);
-
-        return redirect()->route('agent-request.index')->with('success', 'Request berhasil dikirim');
-    }
+    return redirect()->route('request.index')->with('success', 'Request berhasil dikirim');
+}
 
     public function show($id) {
-        $agentRequest=AgentRequest::with('item', 'agent')->findOrFail($id);
-        return view('agent_request.show', compact('agentRequest'));
+        $agentRequest=AgentRequest::with('item', 'agent', 'approver', 'rejector')->findOrFail($id);
+        return view('request.detail', compact('agentRequest'));
     }
 
     public function edit($id) {
@@ -53,34 +48,29 @@ class AgentRequestController extends Controller {
         }
 
         $items=Item::all();
-        return view('agent_request.edit', compact('agentRequest', 'items'));
+        return view('request.edit', compact('agentRequest', 'items'));
     }
 
     public function update(Request $request, $id) {
-        $agentRequest=AgentRequest::findOrFail($id);
+    $agentRequest = AgentRequest::findOrFail($id);
 
-        if ($agentRequest->status !==AgentRequest::STATUS_WAITING) {
-            return back()->with('error', 'Hanya request dengan status waiting yang bisa diupdate!');
-        }
-
-        $request->validate([ 'item_id'=> 'required|exists:item,id',
-            'jumlah_barang'=> 'required|numeric|min:1',
-            'note'=> 'nullable|string',
-            ]);
-
-        $stok=Stok::where('item_id', $request->item_id)->first();
-
-        if ( !$stok || $stok->jumlah_barang < $request->jumlah_barang) {
-            return back()->with('error', 'Stok tidak mencukupi!');
-        }
-
-        $agentRequest->update([ 'item_id'=> $request->item_id,
-            'jumlah_barang'=> $request->jumlah_barang,
-            'note'=> $request->note,
-            ]);
-
-        return redirect()->route('agent-request.index')->with('success', 'Request berhasil diperbarui');
+    if ($agentRequest->status !== AgentRequest::STATUS_WAITING) {
+        return back()->with('error', 'Hanya request dengan status waiting yang bisa diupdate!');
     }
+
+    $request->validate([
+        'item_id' => 'required|exists:item,id',
+        'jumlah_barang' => 'required|numeric|min:1',
+    ]);
+
+    $agentRequest->update([
+        'item_id' => $request->item_id,
+        'jumlah_barang' => $request->jumlah_barang,
+        'total' => $request->jumlah_barang * 25,
+    ]);
+
+    return redirect()->route('request.index')->with('success', 'Request berhasil diperbarui');
+}
 
     public function destroy($id) {
         $agentRequest=AgentRequest::findOrFail($id);
@@ -90,7 +80,7 @@ class AgentRequestController extends Controller {
         }
 
         $agentRequest->delete();
-        return redirect()->route('agent-request.index')->with('success', 'Request berhasil dihapus');
+        return redirect()->route('request.index')->with('success', 'Request berhasil dihapus');
     }
 
     public function approve(Request $request, $id)
@@ -101,15 +91,14 @@ class AgentRequestController extends Controller {
         return back()->with('error', 'Hanya request dengan status waiting yang bisa diapprove!');
     }
 
-    // Cek stok admin
-    $stok = Stok::where('item_id', $agentRequest->item_id)->first();
+    // Kurangi stok di tabel item
+    $item = Item::findOrFail($agentRequest->item_id);
 
-    if (!$stok || $stok->jumlah_barang < $agentRequest->jumlah_barang) {
+    if ($item->stok < $agentRequest->jumlah_barang) {
         return back()->with('error', 'Stok tidak mencukupi!');
     }
 
-    // Kurangi stok admin
-    $stok->decrement('jumlah_barang', $agentRequest->jumlah_barang);
+    $item->decrement('stok', $agentRequest->jumlah_barang);
 
     // Tambah atau update stok agent
     $agentStok = AgentStok::where('agent_id', $agentRequest->agent_id)
@@ -130,12 +119,11 @@ class AgentRequestController extends Controller {
     $agentRequest->update([
         'status' => AgentRequest::STATUS_APPROVED,
         'approved_at' => now(),
-        'approved_by' => auth()->user()->id,
+        'approved_by' => auth()->id(),
     ]);
 
-    return redirect()->route('agent-request.index')->with('success', 'Request berhasil diapprove!');
+    return redirect()->route('request.index')->with('success', 'Request berhasil diapprove!');
 }
-
 public function reject(Request $request, $id)
 {
     $request->validate([
@@ -155,7 +143,7 @@ public function reject(Request $request, $id)
         'rejected_reason' => $request->rejected_reason,
     ]);
 
-    return redirect()->route('agent-request.index')->with('success', 'Request berhasil direject!');
+    return redirect()->route('request.index')->with('success', 'Request berhasil direject!');
 }
 
 }

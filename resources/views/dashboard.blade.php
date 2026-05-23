@@ -477,6 +477,13 @@
                 </a>
             </li>
 
+             <li>
+                <a href="{{ route('request.index') }}">
+                    <i class="bi bi-box-arrow-up"></i>
+                    <span>Request</span>
+                </a>
+            </li>
+
             <li>
                 <a href="#">
                     <i class="bi bi-cash"></i>

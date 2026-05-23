@@ -13,12 +13,10 @@ class AgentRequest extends Model
 
     protected $fillable = [
         'agent_id',
-        'kode_request',
         'tanggal_request',
         'item_id',
         'jumlah_barang',
         'status',
-        'note',
         'approved_at',
         'approved_by',
         'rejected_at',
@@ -26,6 +24,7 @@ class AgentRequest extends Model
         'rejected_reason',
         'received_at',
         'foto_pemberian',
+        'total',
     ];
 
    
