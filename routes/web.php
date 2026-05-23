@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\ItemController;
 // halaman utama → arahkan ke role
 Route::get('/', function () {
     return view('login');
@@ -73,3 +74,10 @@ Route::delete('/agent/{id}/delete', [AgentController::class, 'destroy'])->name('
 Route::get('/agent/{id}/detail', [AgentController::class, 'detail'])->name('agent.detail');
 Route::get('/agent/{id}/create', [AgentController::class, 'createMember'])->name('agent.tambah.anggota');
 Route::post('/agent/{id}/store', [AgentController::class, 'storeMember'])->name('agent.store.anggota');
+
+Route::get('/item', [ItemController::class, 'index'])->name('item.index');
+Route::get('item/create', [ItemController::class, 'create'])->name('item.create');
+Route::post('/item/store', [ItemController::class, 'store'])->name('item.store');
+Route::get('item/{id}/edit', [ItemController::class, 'edit'])->name('item.edit');
+Route::put('item/{id}', [ItemController::class, 'update'])->name('item.update');
+Route::delete('/item/{id}', [ItemController::class, 'destroy'])->name('item.destroy');

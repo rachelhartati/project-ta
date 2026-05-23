@@ -373,7 +373,7 @@
                         <h3>Form Edit Item</h3>
                     </div>
 
-                    <form action="#" method="POST">
+                    <form action="{{route('item.update', $item->id)}}" method="POST">
                         @csrf
                         @method('PUT')
 
@@ -382,13 +382,19 @@
                             <div class="col-md-6">
                                 <label class="form-label">Nama Item</label>
                                 <input type="text" class="form-control" placeholder="Masukkan nama item"
-                                    name="nama_item">
+                                    name="nama_item" value="{{old('nama_item', $item->nama_item)}}">
                             </div>
 
                             <div class="col-md-6">
                                 <label class="form-label">Harga Barang</label>
                                 <input type="number" class="form-control" placeholder="Masukkan harga barang"
-                                    name="harga_barang">
+                                    name="harga_barang" value="{{old('harga_barang', $item->harga_barang)}}">
+                            </div>
+
+                             <div class="col-md-6">
+                                <label class="form-label">Stok</label>
+                                <input type="number" class="form-control" placeholder="Masukkan harga barang"
+                                    name="stok" value="{{old('stok','$item->stok')}}">
                             </div>
 
                         </div>

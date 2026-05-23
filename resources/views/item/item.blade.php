@@ -423,7 +423,7 @@
                                 <i class="bi bi-search"></i>
                             </div>
 
-                            <a href="#" class="btn-add">
+                            <a href="{{route('item.create')}}" class="btn-add">
                                 <i class="bi bi-plus-lg"></i> Tambah
                             </a>
 
@@ -439,22 +439,24 @@
                                 <th>No</th>
                                 <th>Nama Item</th>
                                 <th>Harga Barang</th>
-                                <th>Aksi</th>
+                                <th>Stok</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            {{-- @foreach($item as $items)
+                            @foreach($item as $items)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $items->nama_item }}</td>
                                 <td>Rp {{ number_format($items->harga_barang, 0, ',', '.') }}</td>
+                                <td>{{$items->stok ?? '-'}}</td>
                                 <td>
                                     <div class="action">
-                                        <a href="#" class="btn btn-edit">
+                                        <a href="{{route('item.edit', $items->id)}}" class="btn btn-edit">
                                             <i class="bi bi-pencil"></i> Edit
                                         </a>
-                                        <form action="#" method="POST"
+                                        <form action="{{route('item.destroy', $items->id)}}" method="POST"
                                             onsubmit="return confirm('Yakin ingin menghapus item ini?')">
                                             @csrf
                                             @method('DELETE')
@@ -465,7 +467,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            @endforeach --}}
+                            @endforeach
                         </tbody>
 
                     </table>
@@ -473,7 +475,9 @@
                     {{-- PAGINATION --}}
                     <div class="pagination">
 
-                        <span>Menampilkan data item</span>
+                        <span>
+                           Menampilkan {{ $item->count() }} dari {{ $item->total() }} item
+                        </span>
 
                         <div class="page-number">
 

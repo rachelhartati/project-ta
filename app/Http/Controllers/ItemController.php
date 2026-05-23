@@ -7,28 +7,31 @@ use App\Models\Item;
 
 class ItemController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('role:admin');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('role:admin');
+    // }
+
     public function index(){
-        $item = Item::all();
-        return view('item.index', compact('item'));
+        $item = Item::paginate(10);
+        return view('item.item', compact('item'));
     }
 
     public function create(){
-        return view('item.create');
+        return view('item.tambah');
     }
 
     public function store(Request $request){
         $request->validate([
             'nama_item' => 'required|string',
             'harga_barang' => 'required|numeric',
+            'stok' => 'nullable|integer|min:0',
         ]);
 
         $item = Item::create([
             'nama_item' => $request->nama_item,
             'harga_barang' => $request->harga_barang,
+            'stok' => $request->stok ?? 0,
         ]);
 
         return redirect()->route('item.index')->with('success', 'Item berhasil ditambahkan');
@@ -43,12 +46,14 @@ class ItemController extends Controller
         $request->validate([
             'nama_item' => 'required|string',
             'harga_barang' => 'required|numeric',
+            'stok' => 'nullable|integer|min:0'
         ]);
 
         $item = Item::findOrFail($id);
         $item->update([
             'nama_item' => $request->nama_item,
             'harga_barang' => $request->harga_barang,
+            'stok' => $request->stok,
         ]);
 
         return redirect()->route('item.index')->with('success', 'Item berhasil diperbarui');

@@ -492,7 +492,7 @@
             </li>
 
              <li>
-                <a href="#">
+                <a href="{{route('item.index')}}">
                     <i class="bi bi-box2"></i>
                     <span>Item</span>
                 </a>

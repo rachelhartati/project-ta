@@ -363,17 +363,13 @@
 
             {{-- CONTENT --}}
             <div class="content">
-
-                <div class="title">Tambah Item</div>
-                <div class="subtitle">Isi data untuk menambahkan item baru</div>
-
                 <div class="table-box">
 
                     <div class="table-header">
                         <h3>Form Tambah Item</h3>
                     </div>
 
-                    <form action="#" method="POST">
+                  <form action="{{ route('item.store') }}" method="POST">
                         @csrf
 
                         <div class="row g-3">
@@ -388,6 +384,12 @@
                                 <label class="form-label">Harga Barang</label>
                                 <input type="number" class="form-control" placeholder="Masukkan harga barang"
                                     name="harga_barang">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Stok Barang</label>
+                                <input type="number" class="form-control" placeholder="Masukkan harga barang"
+                                    name="stok">
                             </div>
 
                         </div>
