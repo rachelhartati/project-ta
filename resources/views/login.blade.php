@@ -58,27 +58,24 @@
                 SIMPL<span>A</span>ST
             </div>
 
-            <div class="subtitle">
-                Silahkan pilih peran Anda untuk melanjutkan
-            </div>
-
         </div>
         
 
         <div class="form-container">
 
             <!-- FORM -->
-            <form method="POST" action="{{ route('login.process') }}">
+            <form action="{{route('login')}}" method="POST">
                 @csrf
 
                 <label>
-                    Username <span>*</span>
+                    No Telephone <span>*</span>
                 </label>
 
                 <input
                     type="text"
-                    name="username"
+                    name="no_tlp"
                     placeholder="Masukkan username"
+                    required
                 >
 
                 <label>
@@ -89,6 +86,7 @@
                     type="password"
                     name="password"
                     placeholder="Masukkan password"
+                    required
                 >
 
                 <button type="submit">

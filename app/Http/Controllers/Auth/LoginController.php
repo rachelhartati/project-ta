@@ -9,12 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
-{
-    public function index()
-    {
-        return view('auth.login');
-    }
-    
+{ 
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -30,6 +25,10 @@ class LoginController extends Controller
 
         if (!Hash::check($credentials['password'], $user->password)){
             return back()->with('error', 'Password salah');
+        }
+
+        if ($user->status !=1) {
+            return back()->with('error', 'Akun belum aktif, Harap Kontak Admin');
         }
 
         Auth::login($user);

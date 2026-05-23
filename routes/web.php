@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
@@ -14,7 +14,7 @@ Route::get('/', function () {
 
 
 // proses login
-Route::post('/login', [AuthController::class, 'login'])->name('login.process');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 // halaman dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
