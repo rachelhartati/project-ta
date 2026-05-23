@@ -492,7 +492,7 @@
             </li>
 
              <li>
-                <a href="{{route('user')}}">
+                <a href="{{route('user.index')}}">
                     <i class="bi bi-person"></i>
                     <span>User</span>
                 </a>

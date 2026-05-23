@@ -12,37 +12,36 @@ class UserController extends Controller
 {
     public function index()
     {
-        $user = User::with('agent', 'roles')->get();
-        return view('user.index', compact('user'));
+        $user = User::with('agent', 'roles')->paginate(10);
+        return view('user.user', compact('user'));
     }
 
-    public function create()
-    {
-        $agent = Agent::all();
-        $role = Role::all();
-        return view('user.create', compact('agent', 'role'));
-    }
+    // public function create()
+    // {
+    //     $agent = Agent::all();
+    //     $role = Role::all();
+    //     return view('user.create', compact('agent', 'role'));
+    // }
 
     public function store(Request $request)
     {
         $request->validate([
-            'nama_lengkap' => 'required|string|max:255',
-            'alamat' => 'required|string|max:255',
-            'no_tlp' => 'required|string|max:20|unique:user,no_tlp',
-            'password' => 'required|string|min:6',
-            'agent_id' => 'nullable|exists:agent,id',
-            'status' => 'required|in:0,1',
-            'role' => 'nullable|exists:roles,name',
-        ]);
+    'nama_lengkap' => 'required|string|max:255',
+    'alamat'       => 'required|string|max:255',
+    'no_tlp'       => 'required|string|max:20|unique:user,no_tlp',
+    'password'     => 'required|string|min:6',
+    'agent_id'     => 'nullable|exists:agent,id',
+    'status'       => 'nullable|in:0,1',
+]);
 
-        $user = User::create([
-            'nama_lengkap' => $request->nama_lengkap,
-            'alamat' => $request->alamat,
-            'no_tlp' => $request->no_tlp,
-            'password' => bcrypt($request->password),
-            'agent_id' => $request->agent_id,
-            'status' => $request->status,
-        ]);
+$user = User::create([
+    'nama_lengkap' => $request->nama_lengkap,
+    'alamat'       => $request->alamat,
+    'no_tlp'       => $request->no_tlp,
+    'password'     => bcrypt($request->password),
+    'agent_id'     => $request->agent_id ?? null,
+    'status'       => $request->status ?? null,
+]);
 
         if ($request->has('role')) {
            $user->assignRole($request->role);
@@ -50,12 +49,14 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('success', 'User berhasil ditambahkan.');
     }
 
-    public function edit($id){
-        $user = User::findOrFail($id);
-        $agent = Agent::all();
-        $role = Role::all();
-        return view('user.edit', compact('user', 'agent', 'role'));
-    }
+    public function getUser($id){
+    $user = User::with('agent', 'roles')->findOrFail($id);
+    return response()->json([
+        'user'   => $user,
+        'agents' => Agent::all(),
+        'roles'  => Role::all(),
+    ]);
+}
 
     public function update(Request $request, $id){
         $user = User::findOrFail($id);

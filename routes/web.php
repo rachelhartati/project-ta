@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\UserController;
 // halaman utama → arahkan ke role
 Route::get('/', function () {
     return view('login');
@@ -40,10 +40,16 @@ Route::get('/kelola-setoran', function () {
     return view('kelola-setoran');
 }) ->name('kelola-setoran');
 
-Route::get('/user', function () {
-    return view('user');
-}) ->name('user');
+// Route::get('/user', function () {
+//     return view('user.user');
+// }) ->name('user');
 
 Route::get('/role', function () {
     return view('role');
 }) ->name('role');
+
+Route::get('/user', [UserController::class, 'index'])->name('user.index');
+Route::post('/user', [UserController::class, 'store'])->name('user.store');
+Route::get('/user/{id}/data', [UserController::class, 'getUser']);
+Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
