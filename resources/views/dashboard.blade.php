@@ -471,9 +471,9 @@
             </li>
 
             <li>
-                <a href="{{ route('kelola-agenanggota') }}">
+                <a href="{{ route('agent.index') }}">
                     <i class="bi bi-people"></i>
-                    <span>Kelola Agen & Anggota</span>
+                    <span>Agen & Anggota</span>
                 </a>
             </li>
 
@@ -492,6 +492,21 @@
             </li>
 
              <li>
+                <a href="#">
+                    <i class="bi bi-box2"></i>
+                    <span>Item</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="">
+                    <i class="bi bi-arrow-left-right"></i>
+                    <span>Stok</span>
+                </a>
+            </li>
+
+
+            <li>
                 <a href="{{route('user.index')}}">
                     <i class="bi bi-person"></i>
                     <span>User</span>

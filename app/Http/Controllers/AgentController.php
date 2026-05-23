@@ -9,21 +9,20 @@ use Spatie\Permission\Models\Role;
 
 class AgentController extends Controller
 {
-  public function index(){
-    $agent = Agent::all();
-    $user = User::all();
-    return view('agent.index', compact('agent', 'user'));
-  }
+ public function index(){
+    $agent = Agent::withCount('users')->paginate(10);
+    return view('agent.agent', compact('agent'));
+}
 
   public function detail($id){
     $agent = Agent::findOrFail($id);
-    $user = User::all();
+    $user = User::where('agent_id', $id)->get();
     return view('agent.detail', compact('agent', 'user'));
   }
 
   public function create(){
     $user = User::all();
-    return view('agent.create', compact('user'));
+    return view('agent.tambah', compact('user'));
   }
 
   public function store(Request $request){
@@ -31,14 +30,14 @@ class AgentController extends Controller
         'nama_agent' => 'required|string',
         'alamat_agent' => 'required|string',
         'no_tlp_agent' => 'required|string',
-        'pic_id' => 'required|exists:user,id',
+        'pic_id' => 'nullable|exists:user,id',
     ]);
 
     $agent = Agent::create([
         'nama_agent' => $request->nama_agent,
         'alamat_agent' => $request->alamat_agent,
         'no_tlp_agent' => $request->no_tlp_agent,
-        'pic_id' => $request->pic_id,
+        'pic_id' => $request->pic_id ?? null,
     ]);
     return redirect()->route('agent.index')->with('success', 'Agent berhasil disimpan');
   }
@@ -54,7 +53,7 @@ class AgentController extends Controller
         'nama_agent' => 'required|string',
         'alamat_agent' => 'required|string',
         'no_tlp_agent' => 'required|string',
-        'pic_id' => 'required|exists:user,id',
+        'pic_id' => 'nullable|exists:user,id',
     ]);
 
     $agent = Agent::findOrFail($id);
@@ -62,7 +61,7 @@ class AgentController extends Controller
         'nama_agent' => $request->nama_agent,
         'alamat_agent' => $request->alamat_agent,
         'no_tlp_agent' => $request->no_tlp_agent,
-        'pic_id' => $request->pic_id,
+        'pic_id' => $request->pic_id ?? null,
     ]);
     return redirect()->route('agent.index')->with('success', 'Agent berhasil diperbarui');
   }
@@ -71,10 +70,11 @@ class AgentController extends Controller
         $agent = Agent::findOrFail($id);
         $agent->delete();
         return redirect()->route('agent.index')->with('success', 'Agent berhasil dihapus');
-    }
+  }
 
-  public function createMember(){
-    return view('agent.create_member');
+  public function createMember($id){
+    $agent = Agent::findOrFail($id);
+    return view('agent.tambahanggota', compact('agent')); 
   }
 
   public function storeMember(Request $request){
@@ -90,7 +90,7 @@ class AgentController extends Controller
         'alamat' => $request->alamat,
         'no_tlp' => $request->no_tlp,
         'password' => bcrypt($request->password),
-        'agent_id' => auth()->user()->agent_id, // ← ambil dari user yang login
+        'agent_id' => $request->agent_id,
         'status' => 1,
     ]);
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\AgentController;
 // halaman utama → arahkan ke role
 Route::get('/', function () {
     return view('login');
@@ -33,9 +34,6 @@ Route::get('/kelola-pesanan', function () {
     return view('kelola-pesanan');
 })->name('kelola-pesanan');
 
-Route::get('/kelola-agenanggota', function () {
-    return view('kelola-agenanggota');
-}) ->name('kelola-agenanggota');
 
 Route::get('/kelola-setoran', function () {
     return view('kelola-setoran');
@@ -50,7 +48,9 @@ Route::get('/role', function () {
 }) ->name('role');
 
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
+Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 Route::post('/user', [UserController::class, 'store'])->name('user.store');
+Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
 Route::get('/user/{id}/data', [UserController::class, 'getUser']);
 Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
 Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
@@ -63,3 +63,13 @@ Route::put('/role/{id}', [RoleController::class, 'update'])->name('role.update')
 Route::delete('/role/{id}', [RoleController::class, 'destroy'])->name('role.destroy');
 Route::get('/role/{id}/permissions', [RoleController::class, 'permissions'])->name('role.permissions');
 Route::post('/role/{id}/permissions', [RoleController::class, 'updatePermissions'])->name('role.permissions.update');
+
+Route::get('/agent', [AgentController::class, 'index'])->name('agent.index');
+Route::get('/agen/create', [AgentController::class, 'create'])->name('agent.create');
+Route::post('/agent/store', [AgentController::class, 'store'])->name('agent.store');
+Route::get('/agent/{id}/edit', [AgentController::class, 'edit'])->name('agent.edit');
+Route::put('/agent/{id}/update', [AgentController::class, 'update'])->name('agent.update');
+Route::delete('/agent/{id}/delete', [AgentController::class, 'destroy'])->name('agent.destroy');
+Route::get('/agent/{id}/detail', [AgentController::class, 'detail'])->name('agent.detail');
+Route::get('/agent/{id}/create', [AgentController::class, 'createMember'])->name('agent.tambah.anggota');
+Route::post('/agent/{id}/store', [AgentController::class, 'storeMember'])->name('agent.store.anggota');

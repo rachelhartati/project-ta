@@ -23,4 +23,8 @@ class Agent extends Model
     {
         return $this->belongsTo(User::class, 'pic_id');
     }
+
+    public function users(){
+    return $this->hasMany(User::class, 'agent_id');
+}
 }

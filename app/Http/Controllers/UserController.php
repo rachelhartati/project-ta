@@ -16,12 +16,12 @@ class UserController extends Controller
         return view('user.user', compact('user'));
     }
 
-    // public function create()
-    // {
-    //     $agent = Agent::all();
-    //     $role = Role::all();
-    //     return view('user.create', compact('agent', 'role'));
-    // }
+    public function create()
+    {
+        $agent = Agent::all();
+        $role = Role::all();
+        return view('user.tambah', compact('agent', 'role'));
+    }
 
     public function store(Request $request)
     {
@@ -47,6 +47,14 @@ $user = User::create([
            $user->assignRole($request->role);
         }
         return redirect()->route('user.index')->with('success', 'User berhasil ditambahkan.');
+    }
+
+    public function edit($id)
+    {
+        $user = User::with('agent', 'roles')->findOrFail($id);
+        $agent = Agent::all();
+        $role = Role::all();
+        return view('user.edit', compact('user', 'agent', 'role'));
     }
 
     public function getUser($id){

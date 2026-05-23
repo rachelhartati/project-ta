@@ -8,10 +8,10 @@ use App\Models\Item;
 
 class StokController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('role:admin');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('role:admin');
+    // }
 
     public function index(){
         $stok = Stok::all();
