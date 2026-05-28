@@ -487,7 +487,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('kelola-setoran') }}">
+                    <a href="">
                         <i class="bi bi-wallet2"></i>
                         <span>Kelola Setoran</span>
                     </a>

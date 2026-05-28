@@ -9,6 +9,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\AgentRequestController;
 use App\Http\Controllers\AgenStokController;
+use App\Http\Controllers\StoranController;
 // halaman utama → arahkan ke role
 Route::get('/', function () {
     return view('login');
@@ -24,21 +25,22 @@ Route::get('/pemesanan', function () {
     return view('pemesanan');
 });
 
-Route::get('/setoran', function () {
-    return view('setoran');
-});
+Route::get('/storan', [StoranController::class, 'index'])->name('kelola-setoran');
+Route::get('/storan/create', [StoranController::class, 'create'])->name('kelola-setoran.create');
+Route::post('/storan/store', [StoranController::class, 'store'])->name('storan.store');
+Route::put('/storan/{id}/edit', [StoranController::class, 'edit'])->name('storan.edit');
+
+
 Route::get('/index', function () {
     return view('index');
 })->name('index');
 
 Route::get('/kelola-pesanan', function () {
-    return view('kelola-pesanan');
+    return view('prosesrequest.kelola-pesanan');
 })->name('kelola-pesanan');
 
 
-Route::get('/kelola-setoran', function () {
-    return view('kelola-setoran');
-}) ->name('kelola-setoran');
+
 
 // Route::get('/user', function () {
 //     return view('user.user');
@@ -97,5 +99,7 @@ Route::post('/item/store', [ItemController::class, 'store'])->name('item.store')
 Route::get('item/{id}/edit', [ItemController::class, 'edit'])->name('item.edit');
 Route::put('item/{id}', [ItemController::class, 'update'])->name('item.update');
 Route::delete('/item/{id}', [ItemController::class, 'destroy'])->name('item.destroy');
+
+
 
 });

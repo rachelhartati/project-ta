@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-         Schema::table('agent_request', function (Blueprint $table) {
+        Schema::table('agent_request', function (Blueprint $table) {
         $table->dropColumn('kode_request');
         $table->dropColumn('note');
         $table->integer('total');

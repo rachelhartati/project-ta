@@ -106,12 +106,12 @@ class AgentRequestController extends Controller {
         ->first();
 
     if ($agentStok) {
-        $agentStok->increment('jumlah_barang', $agentRequest->jumlah_barang);
+        $agentStok->increment('jumlah_barang', $agentRequest->total);
     } else {
         AgentStok::create([
             'agent_id' => $agentRequest->agent_id,
             'item_id' => $agentRequest->item_id,
-            'jumlah_barang' => $agentRequest->jumlah_barang,
+            'jumlah_barang' => $agentRequest->total,
         ]);
     }
 

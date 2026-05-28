@@ -459,12 +459,12 @@
             <li>
                 <a href="{{ route('kelola-pesanan') }}">
                     <i class="bi bi-file-earmark"></i>
-                    <span>Kelola Pesanan</span>
+                    <span>Distribusi</span>
                 </a>
             </li>
 
             <li>
-                <a href="{{ route('kelola-setoran') }}">
+                <a href="">
                     <i class="bi bi-wallet2"></i>
                     <span>Kelola Setoran</span>
                 </a>
@@ -508,7 +508,7 @@
             <li>
                 <a href="{{route('agentstok.index')}}">
                     <i class="bi bi-collection"></i>
-                    <span>Stok</span>
+                    <span>Stok Agen</span>
                 </a>
             </li>
 

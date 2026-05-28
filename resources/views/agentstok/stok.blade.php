@@ -177,7 +177,121 @@
             min-width: 180px;
         }
 
-        /* ================= TABLE BOX ================= */
+        /* ================= STOK CARDS ================= */
+
+        .stok-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 18px;
+            margin-bottom: 10px;
+        }
+
+        .stok-card {
+            background: white;
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+            border-left: 5px solid #01C094;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            transition: 0.25s;
+        }
+
+        .stok-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        }
+
+        .stok-card.rendah {
+            border-left-color: #f0a500;
+        }
+
+        .stok-card.habis {
+            border-left-color: #ef4444;
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .card-agent {
+            font-size: 15px;
+            font-weight: 600;
+            color: #222;
+        }
+
+        .card-item-name {
+            font-size: 13px;
+            color: #888;
+            margin-top: 3px;
+        }
+
+        .card-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: #e8fff7;
+            color: #01C094;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .card-icon.rendah {
+            background: #fff8e1;
+            color: #f0a500;
+        }
+
+        .card-icon.habis {
+            background: #fff0f0;
+            color: #ef4444;
+        }
+
+        .card-jumlah {
+            font-size: 28px;
+            font-weight: 700;
+            color: #111;
+            line-height: 1;
+        }
+
+        .card-jumlah span {
+            font-size: 14px;
+            font-weight: 400;
+            color: #888;
+        }
+
+        .stok-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            width: fit-content;
+        }
+
+        .stok-aman {
+            background: #d8f7df;
+            color: #1ca54f;
+        }
+
+        .stok-rendah {
+            background: #fff8e1;
+            color: #f0a500;
+        }
+
+        .stok-habis {
+            background: #ffe0e0;
+            color: #d94b4b;
+        }
+
+        /* ================= TABLE BOX (for distribusi) ================= */
 
         .table-box {
             background: white;
@@ -220,44 +334,6 @@
             vertical-align: middle;
         }
 
-        /* ================= BADGE ================= */
-
-        .badge-item {
-            display: inline-flex;
-            align-items: center;
-            padding: 5px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 600;
-            background: #e8fff7;
-            color: #00b386;
-        }
-
-        .stok-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 5px 12px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .stok-aman {
-            background: #d8f7df;
-            color: #1ca54f;
-        }
-
-        .stok-rendah {
-            background: #fff8e1;
-            color: #f0a500;
-        }
-
-        .stok-habis {
-            background: #ffe0e0;
-            color: #d94b4b;
-        }
-
         /* ================= EMPTY STATE ================= */
 
         .empty-state {
@@ -276,34 +352,108 @@
             font-size: 15px;
         }
 
-        /* ================= PAGINATION ================= */
+        .stok-empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: #aaa;
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
 
-        .pagination-wrap {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 14px;
+        .stok-empty i {
+            font-size: 50px;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        /* ================= SECTION TITLE ================= */
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            margin-top: 30px;
+        }
+
+        .section-subtitle {
             color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
         }
 
-        .page-links {
+        /* ================= ACTION BUTTON ================= */
+
+        .action {
             display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-action {
+            height: 34px;
+            padding: 0 14px;
+            border: none;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             gap: 6px;
-        }
-
-        .page-links a {
-            text-decoration: none;
-            padding: 6px 10px;
-            border-radius: 6px;
-            background: #f0f0f0;
-            color: #333;
+            cursor: pointer;
+            transition: 0.3s;
             font-size: 13px;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            white-space: nowrap;
         }
 
-        .page-links .active {
+        .action form {
+            display: contents;
+        }
+
+        .btn-edit {
+            background: #fff8e1;
+            color: #f59e0b;
+        }
+
+        .btn-edit:hover {
+            background: #f59e0b;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-delete {
+            background: #fff0f0;
+            color: #ef4444;
+        }
+
+        .btn-delete:hover {
+            background: #ef4444;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-tambah {
+            height: 38px;
             background: #01C094;
             color: white;
+            border: none;
+            padding: 0 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-tambah:hover {
+            background: #018d6f;
         }
 
         /* ================= RESPONSIVE ================= */
@@ -418,87 +568,96 @@
             <div class="content">
 
                 <div class="title">Stok Agen</div>
-                <div class="subtitle">Data stok barang yang dimiliki setiap agen</div>
 
+
+                {{-- STOK CARDS --}}
+                @forelse($agentstok as $agentStok)
+                @php
+                    $jumlah = $agentStok->jumlah_barang ?? 0;
+                    $kondisi = $jumlah <= 0 ? 'habis' : ($jumlah <= 5 ? 'rendah' : 'aman');
+                @endphp
+                @if($loop->first)
+                <div class="stok-grid">
+                @endif
+
+                    <div class="stok-card {{ $kondisi !== 'aman' ? $kondisi : '' }}">
+                        <div class="card-top">
+                            <div>
+                                <div class="card-agent">{{ $agentStok->agent->nama_agent ?? '-' }}</div>
+                                <div class="card-item-name">{{ $agentStok->item->nama_item ?? '-' }}</div>
+                            </div>
+                            <div class="card-icon {{ $kondisi !== 'aman' ? $kondisi : '' }}">
+                                <i class="bi bi-box-seam"></i>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="card-jumlah">
+                                {{ number_format($jumlah, 0, ',', '.') }}
+                                <span>karung</span>
+                            </div>
+                        </div>
+
+                        @if($kondisi === 'habis')
+                            <span class="stok-badge stok-habis">
+                                <i class="bi bi-x-circle-fill"></i> Stok Habis
+                            </span>
+                        @elseif($kondisi === 'rendah')
+                            <span class="stok-badge stok-rendah">
+                                <i class="bi bi-exclamation-circle-fill"></i> Stok Rendah
+                            </span>
+                        @else
+                            <span class="stok-badge stok-aman">
+                                <i class="bi bi-check-circle-fill"></i> Stok Aman
+                            </span>
+                        @endif
+                    </div>
+
+                @if($loop->last)
+                </div>
+                @endif
+                @empty
+                <div class="stok-empty">
+                    <i class="bi bi-boxes"></i>
+                    <p>Belum ada data stok agen</p>
+                </div>
+                @endforelse
+
+                {{-- DISTRIBUSI SECTION --}}
+                <div class="section-title">Distribusi</div>
+                <div class="section-subtitle">Riwayat pemberian item kepada anggota</div>
 
                 <div class="table-box">
 
                     <div class="table-header">
-                        <h3>Daftar Stok Per Agen</h3>
+                        <h3>Daftar Distribusi</h3>
+                        <a href="#" class="btn-tambah">
+                            <i class="bi bi-plus-lg"></i> Tambah
+                        </a>
                     </div>
 
-                    {{-- TABLE --}}
                     <table>
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Agen</th>
-                                <th>Nama Item</th>
-                                <th>Jumlah Stok</th>
-                                <th>Keterangan</th>
+                                <th>Nama Anggota</th>
+                                <th>Tanggal Pemberian</th>
+                                <th>Item</th>
+                                <th>Jumlah</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($agentstok as $agentStok)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $agentStok->agent->nama_agent ?? '-' }}</td>
-                                <td>
-                                    <span class="badge-item">{{ $agentStok->item->nama_item ?? '-' }}</span>
-                                </td>
-                                <td>{{ number_format($agentStok->jumlah_barang, 0, ',', '.') }} karung</td>
-                                <td>
-                                    @if($agentStok->jumlah_barang <= 0)
-                                        <span class="stok-badge stok-habis">
-                                            <i class="bi bi-x-circle-fill"></i> Stok Habis
-                                        </span>
-                                    @elseif($agentStok->jumlah_barang <= 5)
-                                        <span class="stok-badge stok-rendah">
-                                            <i class="bi bi-exclamation-circle-fill"></i> Stok Rendah
-                                        </span>
-                                    @else
-                                        <span class="stok-badge stok-aman">
-                                            <i class="bi bi-check-circle-fill"></i> Stok Aman
-                                        </span>
-                                    @endif
-                                </td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="5">
+                                <td colspan="6">
                                     <div class="empty-state">
-                                        <i class="bi bi-boxes"></i>
-                                        <p>Belum ada data stok agen</p>
+                                        <i class="bi bi-box-seam"></i>
+                                        <p>Belum ada data distribusi</p>
                                     </div>
                                 </td>
                             </tr>
-                            @endforelse
                         </tbody>
                     </table>
-
-                    {{-- PAGINATION --}}
-                    @if(isset($agentStoks) && method_exists($agentStoks, 'links'))
-                    <div class="pagination-wrap">
-                        <span>Menampilkan {{ $agentStoks->count() }} dari {{ $agentStoks->total() }} data</span>
-                        <div class="page-links">
-                            @if($agentStoks->onFirstPage())
-                                <a href="#"><i class="bi bi-chevron-left"></i></a>
-                            @else
-                                <a href="{{ $agentStoks->previousPageUrl() }}"><i class="bi bi-chevron-left"></i></a>
-                            @endif
-
-                            @for($i = 1; $i <= $agentStoks->lastPage(); $i++)
-                                <a href="{{ $agentStoks->url($i) }}" class="{{ $agentStoks->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
-                            @endfor
-
-                            @if($agentStoks->hasMorePages())
-                                <a href="{{ $agentStoks->nextPageUrl() }}"><i class="bi bi-chevron-right"></i></a>
-                            @else
-                                <a href="#"><i class="bi bi-chevron-right"></i></a>
-                            @endif
-                        </div>
-                    </div>
-                    @endif
 
                 </div>
 

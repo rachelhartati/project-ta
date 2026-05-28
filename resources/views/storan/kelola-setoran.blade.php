@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kelola Pesanan - SIMPLAST</title>
+    <title>Kelola Setoran - SIMPLAST</title>
 
     <!-- FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -158,6 +158,15 @@
             align-items:center;
             margin-bottom:25px;
             box-shadow:0 2px 10px rgba(0,0,0,0.05);
+            flex-wrap:wrap;
+            justify-content:space-between;
+        }
+
+        .filter-left{
+            display:flex;
+            gap:20px;
+            align-items:center;
+            flex-wrap:wrap;
         }
 
         .input-group{
@@ -172,19 +181,9 @@
             color:#999;
         }
 
-        .input{
-            height:48px;
-            width:260px;
-            border:1px solid #ddd;
-            border-radius:8px;
-            padding:0 14px 0 42px;
-            outline:none;
-            font-size:14px;
-        }
-
         .select{
             height:48px;
-            width:180px;
+            width:220px;
             border:1px solid #ddd;
             border-radius:8px;
             padding:0 14px;
@@ -195,12 +194,34 @@
 
         .date-input{
             height:48px;
-            width:180px;
+            width:200px;
             border:1px solid #ddd;
             border-radius:8px;
-            padding:0 14px 0 42px;
+            padding:0 14px;
             outline:none;
             font-size:14px;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .btn{
+            height:48px;
+            background:#00997b;
+            color:white;
+            border:none;
+            padding:0 20px;
+            border-radius:8px;
+            cursor:pointer;
+            font-weight:500;
+            font-size:14px;
+            display:flex;
+            align-items:center;
+            gap:8px;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            background:#00806a;
         }
 
         /* ================= TABLE ================= */
@@ -239,26 +260,9 @@
             font-weight:600;
         }
 
-        .green{
+        .badge-green{
             background:#d8f7df;
             color:#1ca54f;
-        }
-
-        .red{
-            background:#ffe0e0;
-            color:#d94b4b;
-        }
-
-        .status-success{
-            color:#1ca54f;
-            font-weight:600;
-            font-size:13px;
-        }
-
-        .status-warning{
-            color:#f0a500;
-            font-weight:600;
-            font-size:13px;
         }
 
         /* ================= ACTION BUTTON ================= */
@@ -270,16 +274,25 @@
         }
 
         .btn-action{
-            width:38px;
-            height:38px;
+            height:36px;
+            padding:0 14px;
             border:none;
-            border-radius:10px;
-            display:flex;
+            border-radius:8px;
+            display:inline-flex;
             align-items:center;
             justify-content:center;
+            gap:6px;
             cursor:pointer;
             transition:0.3s;
-            font-size:16px;
+            font-size:13px;
+            font-weight:500;
+            font-family:'Poppins', sans-serif;
+            text-decoration:none;
+            white-space:nowrap;
+        }
+
+        .action form{
+            display:contents;
         }
 
         .btn-view{
@@ -293,14 +306,36 @@
             transform:translateY(-2px);
         }
 
-        .btn-more{
+        .btn-print{
             background:#f1f3f5;
             color:#666;
         }
 
-        .btn-more:hover{
+        .btn-print:hover{
             background:#dfe3e6;
             color:#111;
+            transform:translateY(-2px);
+        }
+
+        .btn-edit{
+            background:#fff8e1;
+            color:#f59e0b;
+        }
+
+        .btn-edit:hover{
+            background:#f59e0b;
+            color:white;
+            transform:translateY(-2px);
+        }
+
+        .btn-delete{
+            background:#fff0f0;
+            color:#ef4444;
+        }
+
+        .btn-delete:hover{
+            background:#ef4444;
+            color:white;
             transform:translateY(-2px);
         }
 
@@ -393,7 +428,6 @@
                 align-items:stretch;
             }
 
-            .input,
             .select,
             .date-input{
                 width:100%;
@@ -429,14 +463,14 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="{{ route('kelola-pesanan') }}">
                     <i class="bi bi-file-earmark"></i>
                     <span>Kelola Pesanan</span>
                 </a>
             </li>
 
             <li>
-                <a href="">
+                <a href="#">
                     <i class="bi bi-wallet2"></i>
                     <span>Kelola Setoran</span>
                 </a>
@@ -493,37 +527,33 @@
         <div class="content">
 
             <div class="title">
-                Kelola Pesanan
+                Setoran
             </div>
 
             <div class="subtitle">
-                Mengelola daftar pesanan dari Agen
+                Catat setoran hasil kerja anggota
             </div>
 
             <!-- FILTER -->
             <div class="filter-box">
 
-                <div class="input-group">
-                    <i class="bi bi-search"></i>
+                <div class="filter-left">
 
-                    <input type="text"
-                           class="input"
-                           placeholder="Cari nama agen...">
+                    <select class="select">
+                        <option>Semua Anggota</option>
+                        <option>Ayu</option>
+                        <option>Sella</option>
+                        <option>Sulis</option>
+                    </select>
+
+                    <input type="month" class="date-input">
+
                 </div>
 
-                <select class="select">
-                    <option>Status</option>
-                    <option>Disetujui</option>
-                    <option>Pending</option>
-                </select>
-
-                <div class="input-group">
-                    <i class="bi bi-calendar-event"></i>
-
-                    <input type="text"
-                           class="date-input"
-                           placeholder="Pilih tanggal">
-                </div>
+                <a href="{{route('kelola-setoran.create')}}" class="btn">
+                    <i class="bi bi-plus-lg"></i>
+                    Buat Setoran
+                </a>
 
             </div>
 
@@ -535,133 +565,48 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Tanggal Pesan</th>
-                            <th>Nama Agen</th>
-                            <th>Ukuran Plastik</th>
-                            <th>Total Karung</th>
-                            <th>Total Berat</th>
+                            <th>Anggota</th>
+                            <th>Tanggal</th>
+                            <th>Total (pcs)</th>
+                            <th>Harga (pcs)</th>
+                            <th>Total Harga</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
 
                     <tbody>
-
+                        @foreach($storan as $stor)
                         <tr>
-                            <td>1</td>
-                            <td>5 Maret 2026</td>
-                            <td>Ayu</td>
-                            <td><span class="badge green">5 x 8</span></td>
-                            <td>5 karung</td>
-                            <td>150kg</td>
-                            <td><span class="status-success">Disetujui</span></td>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$stor->agent->nama_agent}}</td>
+                            <td>{{$stor->tanggal_setoran}}</td>
+                            <td>{{$stor->jumlah_pcs}}</td>
+                            <td>Rp {{ number_format($stor->harga_per_pcs, 0, ',', '.') }}</td>
+                            <td>Rp {{ number_format($stor->total, 0, ',', '.') }}</td>
+                            <td><span class="badge badge-green">{{$stor->status}}</span></td>
                             <td>
                                 <div class="action">
 
-                                    <button class="btn-action btn-view">
-                                        <i class="bi bi-eye"></i>
-                                    </button>
+                                    <a href="#" class="btn-action btn-edit">
+                                        
+                                        Edit
+                                    </a>
 
-                                    <button class="btn-action btn-more">
-                                        <i class="bi bi-three-dots"></i>
-                                    </button>
+                                    <form action="#" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-action btn-delete">
+                                            
+                                            Hapus
+                                        </button>
+                                    </form>
 
                                 </div>
                             </td>
                         </tr>
-
-                        <tr>
-                            <td>2</td>
-                            <td>4 Maret 2026</td>
-                            <td>Sella</td>
-                            <td><span class="badge green">5 x 8</span></td>
-                            <td>5 karung</td>
-                            <td>150kg</td>
-                            <td><span class="status-success">Disetujui</span></td>
-                            <td>
-                                <div class="action">
-
-                                    <button class="btn-action btn-view">
-                                        <i class="bi bi-eye"></i>
-                                    </button>
-
-                                    <button class="btn-action btn-more">
-                                        <i class="bi bi-three-dots"></i>
-                                    </button>
-
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>3</td>
-                            <td>10 Maret 2026</td>
-                            <td>Sulis</td>
-                            <td><span class="badge red">4 x 7</span></td>
-                            <td>3 karung</td>
-                            <td>75kg</td>
-                            <td><span class="status-warning">Pending</span></td>
-                            <td>
-                                <div class="action">
-
-                                    <button class="btn-action btn-view">
-                                        <i class="bi bi-eye"></i>
-                                    </button>
-
-                                    <button class="btn-action btn-more">
-                                        <i class="bi bi-three-dots"></i>
-                                    </button>
-
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>4</td>
-                            <td>11 Maret 2026</td>
-                            <td>Rachel</td>
-                            <td><span class="badge red">4 x 7</span></td>
-                            <td>6 karung</td>
-                            <td>140kg</td>
-                            <td><span class="status-warning">Pending</span></td>
-                            <td>
-                                <div class="action">
-
-                                    <button class="btn-action btn-view">
-                                        <i class="bi bi-eye"></i>
-                                    </button>
-
-                                    <button class="btn-action btn-more">
-                                        <i class="bi bi-three-dots"></i>
-                                    </button>
-
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>5</td>
-                            <td>11 Maret 2026</td>
-                            <td>Budi</td>
-                            <td><span class="badge green">6 x 9</span></td>
-                            <td>7 karung</td>
-                            <td>170kg</td>
-                            <td><span class="status-success">Disetujui</span></td>
-                            <td>
-                                <div class="action">
-
-                                    <button class="btn-action btn-view">
-                                        <i class="bi bi-eye"></i>
-                                    </button>
-
-                                    <button class="btn-action btn-more">
-                                        <i class="bi bi-three-dots"></i>
-                                    </button>
-
-                                </div>
-                            </td>
-                        </tr>
-
+                        @endforeach
+                       
                     </tbody>
 
                 </table>
@@ -670,7 +615,7 @@
                 <div class="table-footer">
 
                     <div>
-                        Menampilkan 1–5 dari 25 data
+                        Menampilkan 1–3 dari 3 data
                     </div>
 
                     <div class="pagination">
@@ -680,14 +625,6 @@
                         </button>
 
                         <div class="page-number active">1</div>
-                        <div class="page-number">2</div>
-                        <div class="page-number">3</div>
-                        <div class="page-number">4</div>
-                        <div class="page-number">5</div>
-
-                        <div class="page-number">...</div>
-
-                        <div class="page-number">10</div>
 
                         <button>
                             <i class="bi bi-chevron-right"></i>
